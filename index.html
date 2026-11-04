@@ -417,9 +417,10 @@ ICON.badges = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 const NAV = [['map','學習地圖'],['check','程度檢測'],['wrong','錯題本'],['badges','我的成就']];
 const NAME = '慶鴻';
 const SITE = NAME + '的數學學習網站';
-/* 家人想對慶鴻說的話（可以改成自己的話） */
-const FAMILY_MSG = '慶鴻，不管從哪裡開始都不晚。慢慢來，每天一點點，一定做得到。有不懂的地方隨時問，我們都在你這邊。';
+/* 想對慶鴻說的話：留空就不顯示；填入文字會出現在首頁和歡迎頁 */
+const FAMILY_MSG = '';
 const FAMILY_FROM = '家人';
+const familyCard = () => FAMILY_MSG ? `<div class="family">${esc(FAMILY_MSG)}<div class="from">— ${esc(FAMILY_FROM)}</div></div>` : '';
 function greet(){ const h = new Date().getHours(); return h < 5 ? '夜深了，早點休息' : h < 11 ? '早安' : h < 14 ? '午安' : h < 18 ? '下午好' : '晚上好'; }
 const dayKey = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 const today = () => dayKey(new Date());
@@ -894,7 +895,7 @@ function renderMap(){
         </ol>
         <p>答錯沒關係，錯的題目會自動收進錯題本，之後再回來重做就好。卡住時，每一節都有官方講義可以看。每天練一點，還會解鎖成就章。</p>
         <div class="row"><a class="btn" href="#check" id="wGo">開始程度檢測</a><button class="btn ghost" type="button" id="wSkip">先看看學習地圖</button></div></div>
-      <div class="family">${esc(FAMILY_MSG)}<div class="from">— ${esc(FAMILY_FROM)}</div></div>`;
+      ${familyCard()}`;
     const done = () => { S.welcomed = true; save(); };
     $('#wGo').addEventListener('click', done);
     $('#wSkip').onclick = () => { done(); renderMap(); renderSide({type:'map', tab:'map'}); updateBadges(); setupSpy(); };
@@ -919,7 +920,7 @@ function renderMap(){
     ${notes.length ? `<div class="notes${notes.length > 1 ? ' two' : ''}">${notes.join('')}</div>` : ''}
     <div class="journey" aria-label="各年級進度">${GRADES.map(g => { const ids = BASIC().filter(id => UNITS[id].grade === g); const p = ids.length ? Math.round(passedCount(ids) / ids.length * 100) : 0; return `<a href="#g-${g}" data-jump="g-${g}"><i><b style="width:${p}%"></b></i>${g}</a>`; }).join('')}</div>
     <div class="stats"><span><b>${S.stats.right}</b>題累積答對</span><span><b>${ticked}</b>/ ${totalCan} 項「我會」已勾</span><span><b>${passed}</b>/ ${ORDER.length} 單元確認學會</span></div>
-    <div class="family">${esc(FAMILY_MSG)}<div class="from">— ${esc(FAMILY_FROM)}</div></div>
+    ${familyCard()}
     ${jumpBar(GRADES.map(g => ['g-' + g, g]))}
     ${GRADES.map(g => { const ids = ORDER.filter(id => UNITS[id].grade === g); if (!ids.length) return ''; return `<section id="g-${g}" data-spy><h2 class="grade">${g}</h2><ol class="units two">${ids.map(id => {
       const u = UNITS[id], st = unitStats(id);
