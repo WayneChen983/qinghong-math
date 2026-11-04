@@ -308,6 +308,44 @@ ul.can input:checked + span{color:var(--muted);text-decoration:line-through;text
 .side .foot{margin-top:auto;font-size:12px;color:var(--muted);padding:12px 10px 0;line-height:1.6}
 .side .foot a{color:var(--muted)}
 
+/* ---- 情緒價值：通知、彩帶、成就章、每日目標 ---- */
+#fx{position:fixed;inset:0;pointer-events:none;z-index:39;width:100%;height:100%}
+.toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:40;display:grid;gap:8px;width:min(calc(100vw - 32px),420px);pointer-events:none}
+.toast{background:var(--accent);color:var(--onaccent);border-radius:12px;padding:10px 14px;box-shadow:0 8px 24px var(--shadow);display:flex;gap:12px;align-items:center;font-weight:700;line-height:1.45;animation:tin .35s ease-out}
+.toast small{display:block;font-weight:400;opacity:.88;font-size:13px}
+.toast.out{transition:opacity .4s, transform .4s;opacity:0;transform:translateY(8px)}
+.mini-stamp{flex:none;width:44px;height:44px;border-radius:50%;border:2.5px solid currentColor;display:grid;place-items:center;font-family:var(--serif);font-size:12px;transform:rotate(-10deg)}
+@keyframes tin{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}
+.combo{display:inline-block;margin-left:8px;background:var(--hl);color:#1D3557;border-radius:999px;padding:0 10px;font-size:13px;vertical-align:1px}
+.cheer{color:var(--muted);font-size:15px;margin:2px 0 6px;font-weight:400}
+.hero{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 0}
+.hcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit;min-width:0}
+.hcard:hover{border-color:var(--ink)}
+.hcard .v{font-family:var(--serif);font-weight:900;font-size:24px;line-height:1.1;font-variant-numeric:tabular-nums}
+.hcard .l{font-size:13px;color:var(--muted);line-height:1.35}
+.hcard > div{min-width:0}
+.ring{flex:none;width:52px;height:52px}
+.ring .bg{stroke:var(--soft);stroke-width:6;fill:none}
+.ring .fg{stroke:var(--ok);stroke-width:6;fill:none;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%}
+.ring text{font-size:13px;font-weight:700;fill:var(--ink);font-family:var(--sans)}
+.quote{font-family:var(--serif);font-weight:700;font-size:18px;border-left:4px solid var(--hl);padding:2px 0 2px 12px;margin:16px 0 0;line-height:1.6}
+.quote small{display:block;font-family:var(--sans);font-weight:400;font-size:12px;color:var(--muted);letter-spacing:.06em}
+.family{background:var(--card);border:1.5px dashed var(--pen);border-radius:8px;padding:12px 16px;margin:14px 0 0;font-size:16px;line-height:1.8}
+.family .from{color:var(--muted);font-size:14px;text-align:right;margin-top:4px}
+.journey{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin:16px 0 0}
+.journey a{display:block;text-decoration:none;color:inherit;font-size:13px;text-align:center}
+.journey i{display:block;height:8px;border-radius:4px;background:var(--soft);position:relative;overflow:hidden;margin-bottom:3px}
+.journey i b{position:absolute;inset:0 auto 0 0;background:var(--ok)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px;margin:14px 0 0}
+.bcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 10px 12px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+.bcard b{font-size:15px;line-height:1.4} .bcard span{font-size:13px;color:var(--muted);line-height:1.45}
+.stamp{width:78px;height:78px;border-radius:50%;border:3px solid var(--bad);color:var(--bad);display:grid;place-items:center;text-align:center;font-family:var(--serif);font-weight:900;font-size:14px;line-height:1.15;transform:rotate(-10deg);padding:8px;box-shadow:inset 0 0 0 3px var(--card),inset 0 0 0 4.5px var(--bad);margin-bottom:4px}
+.bcard.locked .stamp{border:2px dashed var(--line);color:var(--muted);box-shadow:none;transform:none;font-size:22px}
+.bcard.locked b{color:var(--muted)}
+.bnew{animation:pop .6s ease-out}
+@keyframes pop{0%{transform:scale(.6) rotate(-30deg);opacity:0}70%{transform:scale(1.1) rotate(-8deg)}100%{transform:rotate(-10deg)}}
+@media (max-width:520px){ .hero{grid-template-columns:1fr 1fr} .hero .hcard:first-child{grid-column:1 / -1} }
+
 @media (min-width:700px){
   h1{font-size:34px}
   ol.units.two,.notes.two{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -321,9 +359,10 @@ ul.can input:checked + span{color:var(--muted);text-decoration:line-through;text
   .side{display:flex;flex-direction:column;gap:16px;position:sticky;top:0;align-self:start;height:100vh;height:100dvh;overflow-y:auto;padding:28px 12px 20px 0;border-right:1px solid var(--line);scrollbar-width:thin}
   main{margin:0;max-width:800px;padding:32px 0 80px}
   .examfoot{bottom:16px}
+  .toasts{bottom:24px;left:auto;right:32px;transform:none}
   h1{font-size:36px}
 }
-@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
 </style>
 </head>
 <body>
@@ -342,6 +381,8 @@ ul.can input:checked + span{color:var(--muted);text-decoration:line-through;text
   <div class="lb-bar"><span>可以上下左右捲動看整張圖</span><button class="btn small" type="button" id="lbClose">關閉</button></div>
   <div class="lb-body" id="lbBody"></div>
 </div>
+<canvas id="fx" hidden aria-hidden="true"></canvas>
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
 <script>
 "use strict";
@@ -372,21 +413,125 @@ const ICON = {
   prefs:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
   zoom:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg>'
 };
-const NAV = [['map','學習地圖'],['check','程度檢測'],['wrong','錯題本']];
+ICON.badges = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"/><path d="m8.5 13.5-1.5 7.5 5-3 5 3-1.5-7.5"/><path d="m10 9 1.5 1.5L14.5 7.5"/></svg>';
+const NAV = [['map','學習地圖'],['check','程度檢測'],['wrong','錯題本'],['badges','我的成就']];
 const NAME = '慶鴻';
 const SITE = NAME + '的數學學習網站';
+/* 家人想對慶鴻說的話（可以改成自己的話） */
+const FAMILY_MSG = '慶鴻，不管從哪裡開始都不晚。慢慢來，每天一點點，一定做得到。有不懂的地方隨時問，我們都在你這邊。';
+const FAMILY_FROM = '家人';
 function greet(){ const h = new Date().getHours(); return h < 5 ? '夜深了，早點休息' : h < 11 ? '早安' : h < 14 ? '午安' : h < 18 ? '下午好' : '晚上好'; }
-const today = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); };
-function touchDay(){ S.days = S.days || {}; const k = today(); S.days[k] = (S.days[k] || 0) + 1; }
+const dayKey = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+const today = () => dayKey(new Date());
+
+/* ---------- 鼓勵的話 ---------- */
+const PRAISE = ['答對了！','漂亮！','就是這樣！','觀念很清楚','穩穩的，答對了','完全正確','這題你掌握了','越來越順了','答對了，而且是你自己想出來的','很好，這個觀念是你的了','讚，繼續保持','對了！你比自己以為的還厲害'];
+const COMBO_MSG = {3:'連對 3 題，手感來了', 5:'連對 5 題！狀態超好', 7:'連對 7 題，太穩了', 10:'連對 10 題，停不下來', 15:'連對 15 題，你是數學機器嗎', 20:'連對 20 題，真的太強了'};
+const WRONG_MSG = ['沒關係，錯的地方就是要變強的地方。','差一點！看完解析，下次就是你的。','會錯才知道哪裡要補，這很正常。','先把這題弄懂，比答對更重要。','這題很多人都會卡，看完解析你就懂了。','錯一次不算什麼，弄懂了就賺到。','已經收進錯題本了，之後再挑戰一次就好。'];
+const QUOTES = ['會錯的題目，是最值得練的題目。','慢慢來，比較快。','今天比昨天多懂一點，就是進步。','數學不是天分，是練習的次數。','卡住的時候，回到上一步，一定找得到路。','每一個學會的觀念，都會一直跟著你。','不用跟別人比，跟昨天的自己比就好。','先求懂，再求快。','把一題真正弄懂，勝過寫十題不懂的。','願意重新開始，本身就很了不起。','基礎打穩了，後面的路會越走越輕鬆。','今天讀一節，就比昨天多一節。','不懂不丟臉，不問才可惜。','看不懂的地方，多看一次，常常就通了。','每天十分鐘，一個月後你會嚇到自己。','錯題本越來越薄，代表你越來越強。','你不是不會數學，只是還沒被好好教過。','一步一步來，沒有人一開始就會。','休息也是學習的一部分，累了就停一下。','最難的是開始，而你已經開始了。'];
+const pick = a => a[Math.floor(Math.random() * a.length)];
+
+/* ---------- 天數、連續、每日目標 ---------- */
+function streak(){
+  const d = S.days || {}; const t = new Date(); let n = 0;
+  if (!d[dayKey(t)]) t.setDate(t.getDate() - 1);
+  while (d[dayKey(t)]){ n++; t.setDate(t.getDate() - 1); }
+  return n;
+}
+function lastStudy(){ const ks = Object.keys(S.days || {}).sort(); return ks.length ? ks[ks.length - 1] : null; }
+function daysSince(k){ if (!k) return null; const [y,m,d] = k.split('-').map(Number); return Math.round((new Date(new Date().toDateString()) - new Date(y, m-1, d)) / 86400000); }
+function touchDay(){
+  S.days = S.days || {}; const k = today(); S.days[k] = (S.days[k] || 0) + 1;
+  if (S.days[k] === S.goal){ S.goalDays[k] = 1; celebrate(`今天的目標達成了！`, `${NAME}，今天練了 ${S.goal} 題，超棒。想多練或休息都可以。`, 'big'); }
+}
+
+/* ---------- 通知與彩帶 ---------- */
+function toast(title, sub, stamp){
+  const box = document.getElementById('toasts'); if (!box) return;
+  const el = document.createElement('div'); el.className = 'toast';
+  el.innerHTML = `${stamp ? `<span class="mini-stamp">${esc(stamp)}</span>` : ''}<div>${esc(title)}${sub ? `<small>${esc(sub)}</small>` : ''}</div>`;
+  box.appendChild(el);
+  while (box.children.length > 3) box.firstChild.remove();
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3600);
+}
+let fxRunning = false;
+function confetti(size){
+  if (reduced() || fxRunning) return;
+  const c = document.getElementById('fx'); if (!c || !c.getContext) return;
+  fxRunning = true; c.hidden = false;
+  const W = innerWidth, H = innerHeight, dpr = window.devicePixelRatio || 1;
+  c.width = W * dpr; c.height = H * dpr; const ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const cs = getComputedStyle(document.documentElement);
+  const cols = ['--hl','--pen','--ok','--fb','--bad','--fa'].map(v => cs.getPropertyValue(v).trim());
+  const n = size === 'big' ? 160 : 70;
+  const ps = Array.from({length:n}, () => ({x: W/2 + (Math.random()-.5) * W * .5, y: H * .38, vx: (Math.random()-.5) * (size === 'big' ? 16 : 10), vy: -Math.random() * 13 - 5, w: Math.random() * 7 + 5, c: cols[Math.random() * cols.length | 0], a: Math.random() * 6, va: (Math.random()-.5) * .35}));
+  let t = 0;
+  (function f(){
+    ctx.clearRect(0, 0, W, H);
+    ps.forEach(p => { p.vy += .32; p.vx *= .985; p.x += p.vx; p.y += p.vy; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.w/2, -p.w/4, p.w, p.w/2); ctx.restore(); });
+    if (++t < 120) requestAnimationFrame(f); else { ctx.clearRect(0, 0, W, H); c.hidden = true; fxRunning = false; }
+  })();
+}
+function celebrate(title, sub, size){ toast(title, sub); confetti(size); }
+
+/* ---------- 成就章 ---------- */
+function passedCount(ids){ return (ids || ORDER).filter(id => S.quiz[id] >= PASS).length; }
+function sectionsDone(){ let n = 0; ORDER.forEach(id => UNITS[id].sections.forEach((_, si) => { if (UNITS[id].sections[si].ind >= 0 && secStats(UNITS[id], si).done) n++; })); return n; }
+const BASIC = () => ORDER.filter(id => !UNITS[id].optional);
+const BADGES = [
+  ['first','第一步','答對第一題', () => S.stats.right >= 1],
+  ['diag','勇敢面對','完成程度檢測', () => !!S.diag],
+  ['r10','十題達成','累積答對 10 題', () => S.stats.right >= 10],
+  ['r50','五十題','累積答對 50 題', () => S.stats.right >= 50],
+  ['r100','百題斬','累積答對 100 題', () => S.stats.right >= 100],
+  ['r300','三百題','累積答對 300 題', () => S.stats.right >= 300],
+  ['r500','五百題','累積答對 500 題', () => S.stats.right >= 500],
+  ['combo5','手感來了','練習時連對 5 題', () => S.stats.maxCombo >= 5],
+  ['combo10','停不下來','練習時連對 10 題', () => S.stats.maxCombo >= 10],
+  ['sec1','第一節完成','第一次把一節的「我會」全部勾完', () => sectionsDone() >= 1],
+  ['sec10','十節完成','完成 10 節', () => sectionsDone() >= 10],
+  ['sec40','四十節','完成 40 節', () => sectionsDone() >= 40],
+  ['unit1','第一個單元','確認學會測驗第一次過關', () => passedCount() >= 1],
+  ['unit5','五個單元','學會 5 個單元', () => passedCount() >= 5],
+  ['unit13','過半了','學會 13 個單元', () => passedCount() >= 13],
+  ['perfect','滿分','確認學會拿到 8 / 8', () => Object.values(S.quiz).some(v => v === 8)],
+  ['streak3','連續三天','連續 3 天都有練習', () => streak() >= 3],
+  ['streak7','一整週','連續 7 天都有練習', () => streak() >= 7],
+  ['streak14','兩週不間斷','連續 14 天都有練習', () => streak() >= 14],
+  ['streak30','一個月','連續 30 天都有練習', () => streak() >= 30],
+  ['goal1','今日達標','第一次達成每日目標', () => Object.keys(S.goalDays).length >= 1],
+  ['goal10','十次達標','達成每日目標 10 天', () => Object.keys(S.goalDays).length >= 10],
+  ['clear1','重新挑戰','錯題本重做答對 1 題', () => S.stats.cleared >= 1],
+  ['clear20','錯題清道夫','錯題本重做答對 20 題', () => S.stats.cleared >= 20],
+  ...GRADES.map(g => ['g' + g, g + '全破', g + '每個單元都學會', () => { const ids = BASIC().filter(id => UNITS[id].grade === g); return ids.length > 0 && passedCount(ids) === ids.length; }]),
+  ['all','國中數學畢業','所有基本單元都學會', () => passedCount(BASIC()) === BASIC().length]
+];
+let badgeReady = false;
+function checkBadges(){
+  if (!badgeReady) return;
+  const fresh = [];
+  BADGES.forEach(([id, name, desc, ok]) => { if (!S.badges[id]){ let v = false; try { v = ok(); } catch(e){} if (v){ S.badges[id] = Date.now(); fresh.push([name, desc]); } } });
+  if (!fresh.length) return;
+  fresh.slice(0, 2).forEach(([n, d]) => toast(`解鎖成就「${n}」`, d, '成就'));
+  if (fresh.length > 2) toast(`還有 ${fresh.length - 2} 個新成就`, '到「我的成就」看看', '成就');
+  confetti(fresh.length > 1 ? 'big' : '');
+}
+let combo = 0;
+function onPracticeAnswer(ok){
+  if (ok){ S.stats.right++; combo++; S.stats.maxCombo = Math.max(S.stats.maxCombo || 0, combo); }
+  else combo = 0;
+  touchDay();
+}
 
 /* ---------- 儲存（只存在這台裝置） ---------- */
 const LS_KEY = 'mathbase-v1';
-const blank = () => ({can:{}, quiz:{}, done:{}, wrong:[], diag:null, last:null, days:{}, welcomed:false, prefs:{fs:'m', theme:'auto'}});
+const blank = () => ({can:{}, quiz:{}, done:{}, wrong:[], diag:null, last:null, days:{}, welcomed:false, prefs:{fs:'m', theme:'auto'}, stats:{right:0, cleared:0, maxCombo:0}, badges:{}, goal:5, goalDays:{}});
 let S = blank();
 let canStore = true;
+function fixS(){ const b = blank(); S.prefs = Object.assign(b.prefs, S.prefs); S.stats = Object.assign(b.stats, S.stats); ['days','badges','goalDays','can','quiz','done'].forEach(k => { if (!S[k] || typeof S[k] !== 'object') S[k] = {}; }); if (!Array.isArray(S.wrong)) S.wrong = []; if (![3,5,10,15].includes(S.goal)) S.goal = 5; }
 try { const v = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); if (v) S = Object.assign(blank(), v); } catch(e){ canStore = false; }
-S.prefs = Object.assign({fs:'m', theme:'auto'}, S.prefs);
-function save(){ try { localStorage.setItem(LS_KEY, JSON.stringify(S)); canStore = true; } catch(e){ canStore = false; } updateBadges(); }
+fixS();
+function save(){ checkBadges(); try { localStorage.setItem(LS_KEY, JSON.stringify(S)); canStore = true; } catch(e){ canStore = false; } updateBadges(); }
 function updateBadges(){
   const n = S.wrong.filter(w => QINDEX[w.id]).length;
   document.querySelectorAll('.wbadge').forEach(b => { b.hidden = !n; b.textContent = n > 99 ? '99+' : n; });
@@ -598,19 +743,23 @@ function qCard(slot, q, opt={}){
     }
     const ansText = q.kind === 'mc' ? `${LETTERS[q.ans]}　${inline(q.opts[q.ans])}` : inline(q.ans[0]);
     fb.hidden = false;
-    fb.innerHTML = `<div class="verdict ${ok?'ok':'bad'}">${ok ? '答對了' : (state.picked == null && !state.value.trim() ? '沒有作答。' : '再看一次。') + '正確答案是 ' + ansText}</div><div class="md">${md(q.why)}</div>${opt.after ? '<div class="qnav"></div>' : ''}`;
+    let head;
+    if (mode === 'exam') head = `<div class="verdict ${ok?'ok':'bad'}">${ok ? '答對' : (state.picked == null && !state.value.trim() ? '沒有作答。' : '') + '正確答案是 ' + ansText}</div>`;
+    else if (ok) head = `<div class="verdict ok">${pick(PRAISE)}${COMBO_MSG[combo] ? `<span class="combo">${COMBO_MSG[combo]}</span>` : combo >= 3 ? `<span class="combo">連對 ${combo} 題</span>` : ''}</div>`;
+    else head = `<div class="verdict bad">正確答案是 ${ansText}</div><p class="cheer">${pick(WRONG_MSG)}</p>`;
+    fb.innerHTML = `${head}<div class="md">${md(q.why)}</div>${opt.after ? '<div class="qnav"></div>' : ''}`;
     if (opt.after) opt.after(fb.querySelector('.qnav'), ok);
   };
   if (q.kind === 'mc'){
     box.querySelectorAll('.opt').forEach(b => b.onclick = () => {
       if (state.answered) return;
       state.picked = +b.dataset.k;
-      if (mode === 'practice'){ const ok = state.picked === q.ans; reveal(ok); opt.onAnswer && opt.onAnswer(ok); }
+      if (mode === 'practice'){ const ok = state.picked === q.ans; opt.onAnswer && opt.onAnswer(ok); reveal(ok); }
       else { box.querySelectorAll('.opt').forEach(x => { x.classList.toggle('sel', x === b); x.setAttribute('aria-pressed', x === b); }); opt.onPick && opt.onPick(); }
     });
   } else {
     const inp = box.querySelector('input');
-    const go = () => { if (state.answered || !inp.value.trim()) return; const ok = checkFill(inp.value, q.ans); reveal(ok); opt.onAnswer && opt.onAnswer(ok); };
+    const go = () => { if (state.answered || !inp.value.trim()) return; const ok = checkFill(inp.value, q.ans); opt.onAnswer && opt.onAnswer(ok); reveal(ok); };
     const b = box.querySelector('[data-chk]'); if (b) b.onclick = go;
     inp.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); if (mode === 'practice') go(); else inp.blur(); } });
     inp.addEventListener('input', () => { state.value = inp.value; opt.onPick && opt.onPick(); });
@@ -700,6 +849,7 @@ function route(){
   else if (h === 'check'){ ctx = {type:'check', tab:'check'}; renderCheck(); }
   else if (h === 'wrong'){ ctx = {type:'wrong', tab:'wrong'}; renderWrong(); }
   else if (h === 'prefs'){ ctx = {type:'prefs', tab:'prefs'}; renderPrefs(); }
+  else if (h === 'badges'){ ctx = {type:'badges', tab:'badges'}; renderBadges(); }
   else renderMap();
   if (ctx.unit) ctx.tab = 'map';
   renderTabs(ctx.tab); renderSide(ctx); updateBadges();
@@ -712,6 +862,20 @@ window.addEventListener('hashchange', route);
 const back = (href, label) => `<a class="back" href="${href}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 5-7 7 7 7"/></svg>${esc(label)}</a>`;
 
 /* ---------- 學習地圖 ---------- */
+function dayIndex(){ const d = new Date(); return Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 86400000) + d.getFullYear(); }
+function ringSvg(v, goal){
+  const r = 22, c = 2 * Math.PI * r, p = Math.min(1, v / goal);
+  return `<svg class="ring" viewBox="0 0 52 52" aria-hidden="true"><circle class="bg" cx="26" cy="26" r="${r}"/><circle class="fg" cx="26" cy="26" r="${r}" stroke-dasharray="${(c * p).toFixed(1)} ${c.toFixed(1)}"/><text x="26" y="30" text-anchor="middle">${p >= 1 ? '✓' : Math.round(p * 100) + '%'}</text></svg>`;
+}
+function moodLine(days, todayN){
+  const gap = daysSince(lastStudy()), st = streak();
+  if (days === 0) return '一項一項把基礎補回來。不追難題，真的懂就好。';
+  if (todayN >= S.goal) return `今天已經練了 ${todayN} 題，目標達成！想多練可以，休息也很好。`;
+  if (todayN > 0) return `今天已經練了 ${todayN} 題，再 ${S.goal - todayN} 題就達成今天的目標。`;
+  if (gap != null && gap >= 3) return `好久不見！歡迎回來。之前學會的都還在，從上次停下的地方繼續就好。`;
+  if (st >= 2) return `已經連續 ${st} 天了，今天也來讀一節，把紀錄延續下去吧。`;
+  return `累積學習 ${days} 天了。今天也來讀一節吧，十幾分鐘就夠。`;
+}
 function renderMap(){
   const rec = recommended(), d = S.diag;
   const passed = ORDER.filter(id => S.quiz[id] >= PASS).length;
@@ -728,8 +892,9 @@ function renderMap(){
           <li><strong style="color:var(--ink)">一節一節讀</strong>：每一節有講解、圖、例題和練習。例題先自己想，再看解答。</li>
           <li><strong style="color:var(--ink)">會了就打勾</strong>：讀完把「我會…」勾起來，再做單元的「確認學會」，8 題對 6 題就過關。</li>
         </ol>
-        <p>答錯沒關係，錯的題目會自動收進錯題本，之後再回來重做就好。卡住時，每一節都有官方講義可以看。</p>
-        <div class="row"><a class="btn" href="#check" id="wGo">開始程度檢測</a><button class="btn ghost" type="button" id="wSkip">先看看學習地圖</button></div></div>`;
+        <p>答錯沒關係，錯的題目會自動收進錯題本，之後再回來重做就好。卡住時，每一節都有官方講義可以看。每天練一點，還會解鎖成就章。</p>
+        <div class="row"><a class="btn" href="#check" id="wGo">開始程度檢測</a><button class="btn ghost" type="button" id="wSkip">先看看學習地圖</button></div></div>
+      <div class="family">${esc(FAMILY_MSG)}<div class="from">— ${esc(FAMILY_FROM)}</div></div>`;
     const done = () => { S.welcomed = true; save(); };
     $('#wGo').addEventListener('click', done);
     $('#wSkip').onclick = () => { done(); renderMap(); renderSide({type:'map', tab:'map'}); updateBadges(); setupSpy(); };
@@ -744,9 +909,17 @@ function renderMap(){
   const unitNo = id => String(ORDER.indexOf(id) + 1).padStart(2, '0');
   view.innerHTML = `
     <h1><span class="hl">${NAME}，${greet()}</span></h1>
-    <p class="lead">${days === 0 ? '一項一項把基礎補回來。不追難題，真的懂就好。' : todayN ? `今天已經練了 ${todayN} 題，很好。累積學習 ${days} 天。` : `累積學習 ${days} 天。今天也來讀一節吧，十幾分鐘就夠。`}</p>
+    <p class="lead">${moodLine(days, todayN)}</p>
+    <div class="hero">
+      <div class="hcard">${ringSvg(todayN, S.goal)}<div><div class="v">${Math.min(todayN, S.goal)} / ${S.goal}</div><div class="l">${todayN >= S.goal ? '今天的目標達成了' : '今天的目標（題）'}</div></div></div>
+      <div class="hcard"><div><div class="v">${streak()}</div><div class="l">連續學習天數<br>累積 ${days} 天</div></div></div>
+      <a class="hcard" href="#badges"><div><div class="v">${Object.keys(S.badges).length}</div><div class="l">成就章<br>共 ${BADGES.length} 個</div></div></a>
+    </div>
+    <p class="quote"><small>今日一句</small>${QUOTES[dayIndex() % QUOTES.length]}</p>
     ${notes.length ? `<div class="notes${notes.length > 1 ? ' two' : ''}">${notes.join('')}</div>` : ''}
-    <div class="stats"><span><b>${days}</b>天累積學習</span><span><b>${ticked}</b>/ ${totalCan} 項「我會」已勾</span><span><b>${passed}</b>/ ${ORDER.length} 單元確認學會</span><span><b>${S.wrong.filter(w => QINDEX[w.id]).length}</b>題在錯題本</span></div>
+    <div class="journey" aria-label="各年級進度">${GRADES.map(g => { const ids = BASIC().filter(id => UNITS[id].grade === g); const p = ids.length ? Math.round(passedCount(ids) / ids.length * 100) : 0; return `<a href="#g-${g}" data-jump="g-${g}"><i><b style="width:${p}%"></b></i>${g}</a>`; }).join('')}</div>
+    <div class="stats"><span><b>${S.stats.right}</b>題累積答對</span><span><b>${ticked}</b>/ ${totalCan} 項「我會」已勾</span><span><b>${passed}</b>/ ${ORDER.length} 單元確認學會</span></div>
+    <div class="family">${esc(FAMILY_MSG)}<div class="from">— ${esc(FAMILY_FROM)}</div></div>
     ${jumpBar(GRADES.map(g => ['g-' + g, g]))}
     ${GRADES.map(g => { const ids = ORDER.filter(id => UNITS[id].grade === g); if (!ids.length) return ''; return `<section id="g-${g}" data-spy><h2 class="grade">${g}</h2><ol class="units two">${ids.map(id => {
       const u = UNITS[id], st = unitStats(id);
@@ -784,7 +957,7 @@ function renderUnit(id){
 /* ---------- 節（主要閱讀頁） ---------- */
 function practiceOpts(slot, q, k){
   return {meta: `<span>練習 ${k+1}</span>${S.done[q.id] === 1 ? '<span>之前答對過</span>' : ''}`,
-    onAnswer: ok => { S.done[q.id] = ok ? 1 : 0; if (ok) removeWrong(q.id); else addWrong(q.id); touchDay(); save(); refreshSideDone(); },
+    onAnswer: ok => { S.done[q.id] = ok ? 1 : 0; if (ok) removeWrong(q.id); else addWrong(q.id); onPracticeAnswer(ok); save(); refreshSideDone(); },
     after: nav => { nav.innerHTML = `<button class="btn ghost small" type="button">重做這題</button>`; nav.firstChild.onclick = () => qCard(slot, q, practiceOpts(slot, q, k)); }};
 }
 function refreshSideDone(){
@@ -817,7 +990,13 @@ function renderSection(id, si){
       ${si < n-1 ? `<a class="btn" href="#u-${id}-${si+2}">下一節 ›</a>` : `<a class="btn" href="#u-${id}-quiz">確認學會測驗 ›</a>`}
     </div>`;
   view.querySelectorAll('.qslot').forEach((slot, k) => { const q = QINDEX[slot.dataset.q].q; qCard(slot, q, practiceOpts(slot, q, k)); });
-  view.querySelectorAll('[data-can]').forEach(cb => cb.onchange = () => { if (cb.checked) S.can[cb.dataset.can] = 1; else delete S.can[cb.dataset.can]; save(); refreshSideDone(); });
+  view.querySelectorAll('[data-can]').forEach(cb => cb.onchange = () => {
+    const before = secStats(u, si).done;
+    if (cb.checked) S.can[cb.dataset.can] = 1; else delete S.can[cb.dataset.can];
+    const after = secStats(u, si).done;
+    save(); refreshSideDone();
+    if (!before && after) celebrate(`「${s.title}」完成！`, si < n - 1 ? `${NAME}，又往前一步了。下一節：${u.sections[si+1].title}` : `${NAME}，這單元每一節都讀完了，去做確認學會吧。`);
+  });
 }
 
 /* ---------- 測驗（確認學會、程度檢測共用） ---------- */
@@ -845,6 +1024,7 @@ function runExam(area, qs, labels, onDone){
     }
     const res = cards.map(c => c.grade());
     const right = res.filter(Boolean).length;
+    S.stats.right += right;
     for (let k = 0; k < cards.length; k++) touchDay();
     foot.remove();
     onDone(right, res);
@@ -858,14 +1038,21 @@ function renderQuiz(id){
     <p class="lead">8 題，全部作答後按「交卷」才會對答案。答對 6 題以上算學會。${S.quiz[id] != null ? `目前最高 ${S.quiz[id]} / 8。` : ''}</p>
     <div id="result"></div><div id="exam"></div>`;
   runExam($('#exam'), u.quiz, null, (right, res) => {
+    const prevBest = S.quiz[id] ?? null;
     S.quiz[id] = Math.max(S.quiz[id] ?? 0, right);
     u.quiz.forEach((q, k) => { if (res[k]) removeWrong(q.id); else addWrong(q.id); });
     save();
     const ok = right >= PASS;
-    $('#result').innerHTML = `<div class="note"><div class="score"><div class="big ${ok?'ok':''}">${right}/8</div><div><strong>${ok ? `${NAME}，學會了！` : '還差一點，沒關係'}</strong><br><span class="muted">${ok ? '這個單元的基礎穩了，可以去下一個單元。' : '下面每題都有解析。看完錯的題目，回到對應的節再練一次，下次一定更好。'}</span></div></div>
+    const title = right === 8 ? `滿分！${NAME}，8 題全對` : ok ? `${NAME}，學會了！` : right === 0 ? '這次沒關係' : '還差一點，沒關係';
+    const msg = right === 8 ? '這個單元完完全全是你的了。真的很厲害。'
+      : ok ? `這個單元的基礎穩了。${right < 8 ? '錯的那幾題看一下解析就好。' : ''}`
+      : right === 0 ? '這代表這個單元正是你最需要補的地方，找到起點就是收穫。從第 1 節慢慢讀起就好。'
+      : `你答對了 ${right} 題，這 ${right} 個觀念已經是你的了。剩下的看完解析、回去練一下，再挑戰一定會過。`;
+    $('#result').innerHTML = `<div class="note"><div class="score"><div class="big ${ok?'ok':''}">${right}/8</div><div><strong>${title}</strong><br><span class="muted">${msg}</span>${prevBest != null && right > prevBest && !ok ? `<br><span class="muted">比上次多對 ${right - prevBest} 題，有進步！</span>` : ''}</div></div>
       <div class="row">${ok ? nextUnitBtn(id) : `<a class="btn" href="#u-${id}">回單元首頁</a>`}<button class="btn ghost small" type="button" id="again">再考一次</button></div></div>`;
     $('#again').onclick = () => { renderQuiz(id); window.scrollTo(0, 0); };
     window.scrollTo({top: 0, behavior: reduced() ? 'auto' : 'smooth'});
+    if (ok) confetti(right === 8 ? 'big' : '');
   });
 }
 function nextUnitBtn(id){ const k = ORDER.indexOf(id); const nx = ORDER.slice(k+1).find(x => !UNITS[x].optional); return nx ? `<a class="btn" href="#u-${nx}">下一個單元：${esc(UNITS[nx].title)}</a>` : `<a class="btn" href="#map">回學習地圖</a>`; }
@@ -886,7 +1073,7 @@ function renderCheck(){
       const weak = pick.filter((p, k) => !res[k]).map(p => p.id);
       S.diag = {at: Date.now(), score: right, total: pick.length, weak}; save();
       $('#result').innerHTML = `<div class="note">${weak.length
-        ? `<h3>${NAME}，建議從「${esc(UNITS[weak[0]].title)}」開始</h3><p>答對 ${right} / ${pick.length}。需要補強：${weak.map(id => esc(UNITS[id].title)).join('、')}。數學是一層疊一層的，先把前面的補好，後面會順很多。</p><a class="btn" href="#u-${weak[0]}">去這個單元</a>`
+        ? `<h3>${NAME}，建議從「${esc(UNITS[weak[0]].title)}」開始</h3><p>答對 ${right} / ${pick.length}。不管幾分都沒關係，這只是幫你找起點，找到了就是收穫。</p><p>需要補強：${weak.map(id => esc(UNITS[id].title)).join('、')}。數學是一層疊一層的，先把前面的補好，後面會順很多。</p><a class="btn" href="#u-${weak[0]}">去這個單元</a>`
         : `<h3>${NAME}，全對，基礎不錯</h3><p>可以從你在學校最卡的單元開始，用「確認學會」測驗檢查。</p><a class="btn" href="#map">回學習地圖</a>`}</div>`;
       window.scrollTo({top: 0, behavior: reduced() ? 'auto' : 'smooth'});
     });
@@ -897,22 +1084,33 @@ function renderCheck(){
 function renderWrong(){
   const items = S.wrong.filter(w => QINDEX[w.id]);
   if (!items.length){
-    view.innerHTML = `<h1><span class="hl">錯題本</span></h1><div class="empty">${NAME}，目前沒有錯題。<br>練習或測驗答錯的題目會自動收在這裡，重做答對就會移除。<br><br><a class="btn ghost" href="#map">回學習地圖</a></div>`;
+    view.innerHTML = `<h1><span class="hl">錯題本</span></h1><div class="empty">${NAME}，目前沒有錯題。${S.stats.cleared ? `<br>你已經從錯題本消滅了 ${S.stats.cleared} 題，太強了。` : ''}<br>練習或測驗答錯的題目會自動收在這裡，重做答對就會移除。<br><br><a class="btn ghost" href="#map">回學習地圖</a></div>`;
     return;
   }
   const groups = {};
   items.forEach(w => { const u = QINDEX[w.id].unit; (groups[u] = groups[u] || []).push(w); });
   const ids = ORDER.filter(id => groups[id]);
   view.innerHTML = `<h1><span class="hl">錯題本</span></h1>
-    <p class="lead">共 ${items.length} 題，依單元排列。重做一次，答對就會從錯題本移除。</p>
+    <p class="lead">每一題都是變強的機會。共 ${items.length} 題，依單元排列，重做答對就會移除。${S.stats.cleared ? `目前已經消滅 ${S.stats.cleared} 題了。` : ''}</p>
     ${ids.length > 1 ? jumpBar(ids.map(id => ['w-' + id, UNITS[id].title])) : ''}
     ${ids.map(id => `<section class="wgroup" id="w-${id}" data-spy><h2>${esc(UNITS[id].title)}（${groups[id].length}）</h2>${groups[id].map(w => { const x = QINDEX[w.id]; return `<div class="wslot" data-id="${w.id}" data-where="${x.sec >= 0 ? `#u-${id}-${x.sec+1}` : `#u-${id}-quiz`}" data-label="${x.sec >= 0 ? '第 ' + (x.sec+1) + ' 節練習' : '確認學會'}"></div>`; }).join('')}</section>`).join('')}`;
   view.querySelectorAll('.wslot').forEach(slot => {
     const q = QINDEX[slot.dataset.id].q;
     qCard(slot, q, {meta: `<span>${esc(slot.dataset.label)}</span><a href="${slot.dataset.where}">回到這一節 ›</a>`,
-      onAnswer: ok => { if (ok){ removeWrong(q.id); S.done[q.id] = 1; } save(); },
-      after: (nav, ok) => { nav.innerHTML = ok ? `<span class="muted small">已從錯題本移除。</span>` : `<a class="btn ghost small" href="${slot.dataset.where}">回去看講解</a>`; }});
+      onAnswer: ok => { if (ok){ removeWrong(q.id); S.done[q.id] = 1; S.stats.cleared++; } onPracticeAnswer(ok); save(); },
+      after: (nav, ok) => { nav.innerHTML = ok ? `<span class="muted small">已從錯題本移除。之前不會的，現在會了。</span>` : `<a class="btn ghost small" href="${slot.dataset.where}">回去看講解</a>`; }});
   });
+}
+
+/* ---------- 我的成就 ---------- */
+function renderBadges(){
+  const got = BADGES.filter(b => S.badges[b[0]]).length;
+  const recent = Object.entries(S.badges).sort((a, b) => b[1] - a[1])[0];
+  const fresh = recent && Date.now() - recent[1] < 60000 ? recent[0] : null;
+  view.innerHTML = `<h1><span class="hl">${NAME}的成就</span></h1>
+    <p class="lead">${got === 0 ? '答對第一題就會拿到第一個章。每一個章，都是你努力過的證明。' : got === BADGES.length ? '全部的章都拿到了。這是真的了不起的事。' : `已經拿到 ${got} 個章了。每一個章，都是你努力過的證明。`}</p>
+    <div class="stats"><span><b>${got}</b>/ ${BADGES.length} 個成就</span><span><b>${streak()}</b>天連續學習</span><span><b>${Object.keys(S.days).length}</b>天累積學習</span><span><b>${S.stats.right}</b>題累積答對</span><span><b>${S.stats.cleared}</b>題錯題消滅</span></div>
+    <div class="badges">${BADGES.map(([id, name, desc]) => { const t = S.badges[id]; return `<div class="bcard${t ? '' : ' locked'}"><div class="stamp${id === fresh ? ' bnew' : ''}">${t ? esc(name) : '？'}</div><b>${esc(name)}</b><span>${t ? esc(desc) + '<br>' + new Date(t).toLocaleDateString('zh-TW') : '怎麼拿：' + esc(desc)}</span></div>`; }).join('')}</div>`;
 }
 
 /* ---------- 設定與備份 ---------- */
@@ -927,6 +1125,7 @@ function renderPrefs(){
   const segBtns = (key, opts) => opts.map(([v, n]) => `<button type="button" data-${key}="${v}" aria-pressed="${S.prefs[key] === v}">${n}</button>`).join('');
   view.innerHTML = `<h1><span class="hl">設定與備份</span></h1>
     <div class="pref"><h2>字的大小</h2><div class="seg" role="group" aria-label="字的大小">${segBtns('fs', [['s','小'],['m','標準'],['l','大'],['xl','特大']])}</div></div>
+    <div class="pref"><h2>每日目標</h2><p class="muted small" style="margin:0 0 8px">一天想練幾題？達成時會有小小的慶祝。設低一點也沒關係，每天都做得到比較重要。</p><div class="seg" role="group" aria-label="每日目標">${[3,5,10,15].map(v => `<button type="button" data-goal="${v}" aria-pressed="${S.goal === v}">${v} 題</button>`).join('')}</div></div>
     <div class="pref"><h2>顏色</h2><div class="seg" role="group" aria-label="顏色">${segBtns('theme', [['auto','跟系統'],['light','淺色'],['dark','深色']])}</div></div>
     <div class="pref"><h2>備份進度</h2><p class="muted small" style="margin:0 0 8px">進度只存在這台裝置的瀏覽器。要換手機或電腦時，按「產生備份碼」，把這串文字傳到新裝置，貼到下面的「還原」。</p>
       <div class="row"><button class="btn small" type="button" id="exp">產生備份碼</button><button class="btn ghost small" type="button" id="copy" hidden>複製</button></div>
@@ -938,6 +1137,7 @@ function renderPrefs(){
       <div class="row" id="rstRow"><button class="btn ghost small" type="button" id="rst">清除全部進度</button></div></div>
     <div class="pref"><h2>關於這個網站</h2><p class="muted small" style="margin:0 0 8px">這是專門為${NAME}做的數學學習網站，幫你把國中數學的基礎一項一項補回來。不用急，每天一點點就好。</p><p class="muted small" style="margin:0">內容依教育部國教署「學習扶助基本學習內容」整理改寫，例題與題目為自編。各節的「官方講義」連結到國教署學習扶助教材網站，著作權屬國教署。這個檔案不需要網路也能使用（官方講義連結除外）。</p></div>`;
   view.querySelectorAll('[data-fs]').forEach(b => b.onclick = () => { S.prefs.fs = b.dataset.fs; save(); applyPrefs(); view.querySelectorAll('[data-fs]').forEach(x => x.setAttribute('aria-pressed', x === b)); });
+  view.querySelectorAll('[data-goal]').forEach(b => b.onclick = () => { S.goal = +b.dataset.goal; save(); view.querySelectorAll('[data-goal]').forEach(x => x.setAttribute('aria-pressed', x === b)); });
   view.querySelectorAll('[data-theme]').forEach(b => b.onclick = () => { S.prefs.theme = b.dataset.theme; save(); applyPrefs(); view.querySelectorAll('[data-theme]').forEach(x => x.setAttribute('aria-pressed', x === b)); });
   $('#exp').onclick = () => { const o = $('#expOut'); o.value = encodeBackup(); o.hidden = false; $('#copy').hidden = false; o.select(); $('#expMsg').textContent = ''; };
   $('#copy').onclick = async () => {
@@ -947,7 +1147,7 @@ function renderPrefs(){
   };
   $('#imp').onclick = () => {
     const m = $('#impMsg');
-    try { const v = decodeBackup($('#impIn').value); S = Object.assign(blank(), v); S.prefs = Object.assign({fs:'m', theme:'auto'}, S.prefs); save(); applyPrefs(); m.className = 'msg ok'; m.textContent = '還原好了。'; }
+    try { const v = decodeBackup($('#impIn').value); S = Object.assign(blank(), v); fixS(); save(); applyPrefs(); m.className = 'msg ok'; m.textContent = '還原好了。'; }
     catch(e){ m.className = 'msg bad'; m.textContent = '備份碼不完整或不對，請重新複製一次（要包含開頭的 MB1:）。'; }
   };
   $('#rst').onclick = () => {
@@ -958,6 +1158,9 @@ function renderPrefs(){
 }
 
 applyPrefs();
+// 開啟時先把已符合的成就默默補上，之後新拿到的才跳通知
+BADGES.forEach(([id, , , ok]) => { if (!S.badges[id]){ try { if (ok()) S.badges[id] = Date.now(); } catch(e){} } });
+badgeReady = true;
 route();
 </script>
 </body>
